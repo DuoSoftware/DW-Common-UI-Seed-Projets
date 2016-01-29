@@ -38,8 +38,9 @@
 			  </div>
 			</div>
 		  </md-input-container>
-          <md-input-container class="md-block" flex-gt-sm>
-          </md-input-container>
+          <div class="md-block" flex-gt-sm>
+				<md-date-picker model="date" label="Pick a date"/>
+          </div>
         </div>
 		<div layout="row" layout-align="end start" layout-margin ng-init="submitted=false" >
 			<md-button id="accountSubmit" class="md-raised md-primary" style="width:100px; margin-left:20px !important" ng-disabled="submitted" type="submit">Submit</md-button>

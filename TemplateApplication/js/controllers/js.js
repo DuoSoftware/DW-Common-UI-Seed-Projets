@@ -31,50 +31,26 @@ angular
 
 .controller('AppCtrl', function ($scope, $mdDialog, $location, $state, $timeout, $q,$http, uiInitilize) {
 
-	
-		
-	//This holds the UI logic for the collapse cards
-	  $scope.toggles = {};
-	  $scope.toggleOne = function($index){
-	   for (ind in $scope.items)
-		if ($scope.toggles[ind] && ind != $index)
-		 $scope.toggles[ind] = false;
-
-	   if (!$scope.toggles[$index])
-		 $scope.toggles[$index] = true;
-	   else $scope.toggles[$index] = !$scope.toggles[$index];
-	 };
-	 
-    this.items = [];
+	this.items = [];
 
     for(var i=0; i<1000; i++){
       this.items.push({'text': 'item-' + i.toString()});
     }
-	$scope.items = uiInitilize.insertIndex(this.items);
-
-    $scope.getDomElementsDesc = function(){
-      var arr = [];
-      var elems = document.querySelectorAll('.card_container');
-      elems = Array.prototype.slice.call(elems);
-      elems.forEach(function(item){
-        arr.push(item.innerHTML.trim());
-      });
-      return arr;
-    }
 	
+	$scope.items = uiInitilize.insertIndex(this.items);
+		
+	 //This holds the UI logic for the collapse cards
+	 $scope.toggles = {};
+	 $scope.toggleOne = function($index)
+	 {	
+		$scope.toggles = uiInitilize.openOne(this.items, $index);
+	 }
+
 	setInterval(function interval(){
 		$scope.viewPortHeight = window.innerHeight;
 		$scope.viewPortHeight = $scope.viewPortHeight+"px";
 	 }, 100);
-	 
-	 var interval = setInterval(function interval(){
-		var t1 = Date.now();
-		$scope.$digest();
-		$scope.digestDuration = (Date.now() - t1);
-	 }, 1000);
-	 $scope.$on('$destroy', function(){
-		clearInterval(interval);
-	 });
+
 	
 })//END OF AppCtrl
 

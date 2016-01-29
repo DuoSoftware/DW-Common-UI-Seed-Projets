@@ -15,7 +15,8 @@ _____  ___  _____ _____    _____ __  ____ __ __ _____ _____      __ _____  ___  
   color: #FFFFFF;
   line-height: 32px;
   text-align: center;
-  text-transform: capitalize; }
+  text-transform: capitalize; 
+  }
 
 .mdc-date-picker__current-date {
   padding: 8px 0; }
@@ -136,7 +137,7 @@ _____  ___  _____ _____    _____ __  ____ __ __ _____ _____      __ _____  ___  
 
 .mdc-date-picker {
   width: 280px;
-  height: 560px; }
+  max-height: 480px; }
 
 .mdc-date-picker__nav button.md-fab {
   width: 32px;
