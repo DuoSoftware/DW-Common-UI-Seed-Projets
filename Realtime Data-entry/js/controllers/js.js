@@ -8,11 +8,6 @@ angular
 	$stateProvider
 	
 	// HOME STATES AND NESTED VIEWS ========================================
-   
-	 .state('main', {
-		url: '/main',
-		templateUrl: 'partials/main.html'
-	})
 	
 	.state('view', {
 		url: '/view',
