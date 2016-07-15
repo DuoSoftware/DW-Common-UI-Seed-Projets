@@ -22,7 +22,7 @@ app.controller('AppCtrl', function ($scope, $mdDialog, $location, $state, $timeo
 	
 })//END OF AppCtrl
 
-app.controller('viewCtrl', function ($scope, $mdDialog, $mdMedia, $window, notifications,uiInitilize, $auth, $objectstore, $fws, $presence) {
+app.controller('viewCtrl', function ($scope, $mdDialog, $mdMedia, $window, notifications,uiInitilize, $auth, $objectstore, $ceb, $presence) {
     	
 	// Initialize an allCustomers array
     $scope.allCustomers = [];
@@ -75,12 +75,12 @@ app.controller('viewCtrl', function ($scope, $mdDialog, $mdMedia, $window, notif
 	$presence.setOnline();
 	
     $presence.onOnline(function(){
-        $fws.subscribeEvent("DemoAppUpdated");
-        $fws.onRecieveEvent("DemoAppUpdated",recieveNotification);        
+        $ceb.subscribeEvent("DemoAppUpdated");
+        $ceb.onRecieveEvent("DemoAppUpdated",recieveNotification);        
     });
 
     function sendNotification(){
-        $fws.triggerevent("DemoAppUpdated", $scope.currentCustomer);
+        $ceb.triggerevent("DemoAppUpdated", $scope.currentCustomer);
     }
     
     function recieveNotification(e,data){
@@ -88,9 +88,6 @@ app.controller('viewCtrl', function ($scope, $mdDialog, $mdMedia, $window, notif
         if (!$scope.allCustomers) $scope.allCustomers = [];
         $scope.allCustomers.push(data);
     }
-    
-	
-    
     
     // Get all exisiting records
     getAllCustomers();
