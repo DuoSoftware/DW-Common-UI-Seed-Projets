@@ -26,10 +26,7 @@ angular.module('mainApp', ['ngMaterial', 'ngAnimate', 'ui.router', 'directivelib
 
   
 .controller('viewCtrl', function ($scope, $mdDialog, $mdMedia, $window, notifications,uiInitilize, $auth, $objectstore, $fws, $presence) {
-    
-	// Check if user is logged in, if not redirect back-into login
-    $auth.checkSession();
-	
+    	
 	// Initialize an allCustomers array
     $scope.allCustomers = [];
     
@@ -73,8 +70,13 @@ angular.module('mainApp', ['ngMaterial', 'ngAnimate', 'ui.router', 'directivelib
         
     }
 
+	// Check if user is logged in, if not redirect back-into login
+    $auth.checkSession();
     
     //CEB Logic
+	
+	$presence.setOnline();
+	
     $presence.onOnline(function(){
         $fws.subscribeEvent("DemoAppUpdated");
         $fws.onRecieveEvent("DemoAppUpdated",recieveNotification);        
@@ -91,7 +93,7 @@ angular.module('mainApp', ['ngMaterial', 'ngAnimate', 'ui.router', 'directivelib
     }
     
 	
-    $presence.setOnline();
+    
     
     // Get all exisiting records
     getAllCustomers();
