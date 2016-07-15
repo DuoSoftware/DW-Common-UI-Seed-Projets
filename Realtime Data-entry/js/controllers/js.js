@@ -1,7 +1,6 @@
-angular
-.module('mainApp', ['ngMaterial', 'ngAnimate', 'ui.router', 'directivelibrary', 'ngMessages' ,'uiMicrokernel'])
+angular.module('mainApp', ['ngMaterial', 'ngAnimate', 'ui.router', 'directivelibrary', 'ngMessages' ,'uiMicrokernel'])
 	
-	.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.otherwise('/view');
 
@@ -19,7 +18,8 @@ angular
 
 
 .controller('AppCtrl', function ($scope, $mdDialog, $location, $state, $timeout, $q,$http, uiInitilize) {
-
+	
+	// $scope variables/functions initialized here can be accessed from any child states. This controller is refernced in the body tag
 	
 })//END OF AppCtrl
 
@@ -27,7 +27,10 @@ angular
   
 .controller('viewCtrl', function ($scope, $mdDialog, $mdMedia, $window, notifications,uiInitilize, $auth, $objectstore, $fws, $presence) {
     
+	// Check if user is logged in, if not redirect back-into login
     $auth.checkSession();
+	
+	// Initialize an allCustomers array
     $scope.allCustomers = [];
     
     //Business logic
@@ -49,7 +52,7 @@ angular
 		$scope.toggles = uiInitilize.openOne($scope.allCustomers, $index);
 	 }
     
-    
+    //Recalculate the height of the window - This is usefult for the md-virtual-repeat container
 	setInterval(function interval(){
 		$scope.viewPortHeight = window.innerHeight;
 		$scope.viewPortHeight = $scope.viewPortHeight+"px";
@@ -78,7 +81,6 @@ angular
     });
 
     function sendNotification(){
-        console.log("notification hit");
         $fws.triggerevent("DemoAppUpdated", $scope.currentCustomer);
     }
     
@@ -88,14 +90,16 @@ angular
         $scope.allCustomers.push(data);
     }
     
+	
     $presence.setOnline();
     
-    
+    // Get all exisiting records
     getAllCustomers();
     
+	// Add a new customer
     $scope.openCustomerInsert = function(ev)
 	{
-		
+		//open Add Customer Dialog box
 		var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
 		
 		 $mdDialog.show({
@@ -106,8 +110,8 @@ angular
 			  fullscreen: useFullScreen
 		}).then(function(answer) {
 			if(answer)
-			{				
-				console.log(answer);
+			{	
+				// After an object is returned form the Dialog box save the data in the objectstore
 				saveCustomer(answer);
 			}
 		});
@@ -122,6 +126,8 @@ angular
 	
 })//END OF AddCtrl
 
+
+//This is the controller for the Add Customer Dialog box
 .controller('addCustomerCtrl', function ($scope, $mdDialog, $mdMedia, $window, notifications) {
     
     $scope.cancel = function()
@@ -131,7 +137,6 @@ angular
     
      $scope.submit = function()
     {
-        //console.log($scope.currentCustomer);
         $mdDialog.hide($scope.currentCustomer);
     }
     
