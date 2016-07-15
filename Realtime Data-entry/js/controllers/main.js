@@ -1,6 +1,6 @@
-angular.module('mainApp', ['ngMaterial', 'ngAnimate', 'ui.router', 'directivelibrary', 'ngMessages' ,'uiMicrokernel'])
+var app = angular.module('mainApp', ['ngMaterial', 'ngAnimate', 'ngMessages', 'ui.router', 'directivelibrary' ,'uiMicrokernel'])
 	
-.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.otherwise('/view');
 
@@ -16,16 +16,13 @@ angular.module('mainApp', ['ngMaterial', 'ngAnimate', 'ui.router', 'directivelib
 
 })
 
-
-.controller('AppCtrl', function ($scope, $mdDialog, $location, $state, $timeout, $q,$http, uiInitilize) {
+app.controller('AppCtrl', function ($scope, $mdDialog, $location, $state, $timeout, $q,$http, uiInitilize) {
 	
 	// $scope variables/functions initialized here can be accessed from any child states. This controller is refernced in the body tag
 	
 })//END OF AppCtrl
 
-
-  
-.controller('viewCtrl', function ($scope, $mdDialog, $mdMedia, $window, notifications,uiInitilize, $auth, $objectstore, $fws, $presence) {
+app.controller('viewCtrl', function ($scope, $mdDialog, $mdMedia, $window, notifications,uiInitilize, $auth, $objectstore, $fws, $presence) {
     	
 	// Initialize an allCustomers array
     $scope.allCustomers = [];
@@ -130,7 +127,7 @@ angular.module('mainApp', ['ngMaterial', 'ngAnimate', 'ui.router', 'directivelib
 
 
 //This is the controller for the Add Customer Dialog box
-.controller('addCustomerCtrl', function ($scope, $mdDialog, $mdMedia, $window, notifications) {
+app.controller('addCustomerCtrl', function ($scope, $mdDialog, $mdMedia, $window, notifications) {
     
     $scope.cancel = function()
     {
@@ -143,10 +140,3 @@ angular.module('mainApp', ['ngMaterial', 'ngAnimate', 'ui.router', 'directivelib
     }
     
 })
-
-
-
-
-
-
-
